@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Directions
 ACTIONS = ['U', 'D', 'L', 'R']
 ACTION_VECTORS = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
 
@@ -63,7 +62,6 @@ class MDPAgent:
         is_goal[self.goal[0]*self.m + self.goal[1]] = True
 
         while True:
-            # policy evaluation
             while True:
                 V_new = np.zeros_like(V)
                 for s in range(N):
@@ -74,7 +72,6 @@ class MDPAgent:
                     break
                 V = V_new
 
-            # policy improvement
             changed = False
             for s in range(N):
                 if is_goal[s]:
@@ -98,26 +95,26 @@ class MDPAgent:
 
     def draw_maze(self, env, trajectory):
         plt.clf()
-        # draw grid
+
         for i in range(self.n+1):
             plt.plot([0, self.m], [i, i], color='black')
         for j in range(self.m+1):
             plt.plot([j, j], [0, self.n], color='black')
 
-        # draw obstacles
+
         for (r, c) in env.obstacles:
             plt.fill_between([c, c+1], r, r+1, color='black')
 
-        # draw goal
+
         gr, gc = env.goal
         plt.fill_between([gc, gc+1], gr, gr+1, color='green', alpha=0.5)
 
-        # draw trajectory
+
         ys = [r + 0.5 for r, c in trajectory]
         xs = [c + 0.5 for r, c in trajectory]
         plt.plot(xs, ys, marker='o')
 
-        # draw agent current position
+
         ar, ac = trajectory[-1]
         plt.plot(ac + 0.5, ar + 0.5, marker='s', markersize=12, color='red')
 
@@ -151,7 +148,6 @@ class MDPAgent:
             plt.show()
         return trajectory
 
-# Example usage and visualization
 if __name__ == '__main__':
     rows, cols = 5, 6
     obstacles = [(0,1), (2,1), (3,1), (2,3), (3,4), (4,4)]
