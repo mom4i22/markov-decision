@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-ACTIONS = ['U', 'D', 'L', 'R']
+ACTIONS = ['R', 'D', 'L', 'U']
 ACTION_VECTORS = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
 
 class MazeEnv:
